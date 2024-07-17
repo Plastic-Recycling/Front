@@ -16,7 +16,8 @@ const Register = () => {
         e.preventDefault();
         try {
             const response = await axios.post(`${API_URL}/register/verifyEmail`, null, { params: { email } });
-            if (response.data === "이메일 확인") {
+            console.log(response.data.isNewEmail)
+            if (response.data.isNewEmail) {
                 setMessage('확인 이메일이 전송되었습니다. 이메일을 확인해주세요.');
             } else {
                 setMessage('이미 인증된 이메일입니다. 토큰을 입력해주세요.');
