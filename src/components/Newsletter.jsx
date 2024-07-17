@@ -42,5 +42,6 @@ export function Newsletter() {
                 </form>
             </div>
         </div>
+
     );
 }
