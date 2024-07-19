@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { Input, Button } from './FormComponents';
 
 const API_URL = 'http://localhost:8080';
 
-const Login = () => {
+const Login = ({setIsLoggedIn}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -15,7 +18,9 @@ const Login = () => {
             const response = await axios.post(`${API_URL}/auth/login`, { username, password });
             localStorage.setItem('accessToken', response.data.accessToken);
             localStorage.setItem('refreshToken', response.data.refreshToken);
+            setIsLoggedIn(true);
             setMessage('Login successful!');
+            setTimeout(() => navigate('/'), 1000);
         } catch (error) {
             setMessage('Login failed. Please check your credentials.');
         }
@@ -32,6 +37,10 @@ const Login = () => {
             </form>
         </div>
     );
+};
+
+Login.propTypes = {
+    setIsLoggedIn: PropTypes.func.isRequired
 };
 
 export default Login;

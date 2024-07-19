@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
-export function Navigation() {
+const API_URL = 'http://localhost:8080';
+
+export function Navigation({isLoggedIn, setIsLoggedIn}) {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
 
     const isActive = (path) => location.pathname === path;
 
@@ -21,13 +26,26 @@ export function Navigation() {
             : `${baseClasses} border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700`;
     };
 
+    const handleLogout = async () => {
+        try {
+            const refreshToken = localStorage.getItem('refreshToken');
+            await axios.post(`${API_URL}/auth/logout`, { refreshToken });
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            setIsLoggedIn(false);
+            navigate('/');
+        } catch (error) {
+            console.error('Logout failed', error);
+        }
+    };
+
     return (
         <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16">
                     <div className="flex">
                         <Link to="/" className="flex-shrink-0 flex items-center">
-                            <img className="h-8 w-auto" src="/src/assets/logo.png" alt="recycle" />
+                            <img className="h-8 w-auto" src="/src/assets/logo.png" alt="recycle"/>
                             <span className="ml-2 text-xl font-bold">Plastic-Recycle</span>
                         </Link>
                     </div>
@@ -44,12 +62,21 @@ export function Navigation() {
                         <Link to="/contact" className={getLinkClassName('/contact')}>
                             Contact
                         </Link>
+                        {isLoggedIn ? (
+                            <>
+                                <Link to="/profile" className={getLinkClassName('/profile')}>Profile</Link>
+                                <button onClick={handleLogout} className={getLinkClassName('/logout')}>Logout</button>
+                            </>
+                        ) : (
+                            <>
                         <Link to="/login" className={getLinkClassName('/login')}>
                             Login
                         </Link>
                         <Link to="/register" className={getLinkClassName('/register')}>
                             Register
                         </Link>
+                            </>
+                    )}
                     </div>
                     {/* Mobile menu button */}
                     <div className="-mr-2 flex items-center sm:hidden">
@@ -59,12 +86,16 @@ export function Navigation() {
                         >
                             <span className="sr-only">Open main menu</span>
                             {!isOpen ? (
-                                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                          d="M4 6h16M4 12h16M4 18h16"/>
                                 </svg>
                             ) : (
-                                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                                          d="M6 18L18 6M6 6l12 12"/>
                                 </svg>
                             )}
                         </button>
@@ -88,15 +119,29 @@ export function Navigation() {
                         <Link to="/contact" className={getMobileLinkClassName('/contact')}>
                             Contact
                         </Link>
+                        {isLoggedIn ? (
+                            <>
+                                <Link to="/profile" className={getMobileLinkClassName('/profile')}>Profile</Link>
+                                <button onClick={handleLogout} className={getMobileLinkClassName('/logout')}>Logout</button>
+                            </>
+                            ) : (
+                                <>
                         <Link to="/login" className={getMobileLinkClassName('/login')}>
                             Login
                         </Link>
                         <Link to="/register" className={getMobileLinkClassName('/register')}>
                             Register
                         </Link>
+                                </>
+                    )}
                     </div>
                 </div>
             )}
         </nav>
     );
 }
+
+Navigation.propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+    setIsLoggedIn: PropTypes.func.isRequired
+};
