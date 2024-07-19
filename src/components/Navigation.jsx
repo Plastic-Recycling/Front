@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation();
+
+    const isActive = (path) => location.pathname === path;
+
+    const getLinkClassName = (path) => {
+        const baseClasses = "inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium";
+        return isActive(path)
+            ? `${baseClasses} border-indigo-500 text-gray-900`
+            : `${baseClasses} border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-300`;
+    };
+
+    const getMobileLinkClassName = (path) => {
+        const baseClasses = "block pl-3 pr-4 py-2 border-l-4 text-base font-medium";
+        return isActive(path)
+            ? `${baseClasses} bg-indigo-50 border-indigo-500 text-indigo-700`
+            : `${baseClasses} border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700`;
+    };
 
     return (
         <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
@@ -15,25 +32,26 @@ export function Navigation() {
                         </Link>
                     </div>
                     <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <Link to="/" className="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium">
+                        <Link to="/" className={getLinkClassName('/')}>
                             Home
                         </Link>
-                        <Link to="/products" className="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">
+                        <Link to="/products" className={getLinkClassName('/products')}>
                             Products
                         </Link>
-                        <Link to="/about" className="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">
+                        <Link to="/about" className={getLinkClassName('/about')}>
                             About
                         </Link>
-                        <Link to="/contact" className="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">
+                        <Link to="/contact" className={getLinkClassName('/contact')}>
                             Contact
                         </Link>
-                        <Link to="/login" className="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">
+                        <Link to="/login" className={getLinkClassName('/login')}>
                             Login
                         </Link>
-                        <Link to="/register" className="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium">
+                        <Link to="/register" className={getLinkClassName('/register')}>
                             Register
                         </Link>
                     </div>
+                    {/* Mobile menu button */}
                     <div className="-mr-2 flex items-center sm:hidden">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
@@ -54,25 +72,26 @@ export function Navigation() {
                 </div>
             </div>
 
+            {/* Mobile menu */}
             {isOpen && (
                 <div className="sm:hidden">
                     <div className="pt-2 pb-3 space-y-1">
-                        <Link to="/" className="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                        <Link to="/" className={getMobileLinkClassName('/')}>
                             Home
                         </Link>
-                        <Link to="/products" className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                        <Link to="/products" className={getMobileLinkClassName('/products')}>
                             Products
                         </Link>
-                        <Link to="/about" className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                        <Link to="/about" className={getMobileLinkClassName('/about')}>
                             About
                         </Link>
-                        <Link to="/contact" className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                        <Link to="/contact" className={getMobileLinkClassName('/contact')}>
                             Contact
                         </Link>
-                        <Link to="/login" className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                        <Link to="/login" className={getMobileLinkClassName('/login')}>
                             Login
                         </Link>
-                        <Link to="/register" className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">
+                        <Link to="/register" className={getMobileLinkClassName('/register')}>
                             Register
                         </Link>
                     </div>
