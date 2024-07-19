@@ -1,14 +1,15 @@
 import React, {useEffect, useRef} from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import CompleteRegistration from './components/CompleteRegistration';
-import { Navigation } from './components/Navigation';
-import { Hero } from './components/Hero';
-import { Products } from './components/Products';
-import { Newsletter } from './components/Newsletter.jsx';
-import { Recycle } from './components/Recycle.jsx';
-import { Main } from './components/Main.jsx';
+import Contact from "./components/Contact.jsx";
+import {Navigation} from './components/Navigation';
+import {Hero} from './components/Hero';
+import {Products} from './components/Products';
+import {Newsletter} from './components/Newsletter.jsx';
+import {Recycle} from './components/Recycle.jsx';
+import {Main} from './components/Main.jsx';
 import Fullpage from 'fullpage.js';
 import 'fullpage.js/dist/fullpage.css';
 import './App.css';
@@ -23,6 +24,7 @@ const App = () => {
                 <main className="flex-1">
                     <Routes>
                         <Route path="/" element={<Home/>}/>
+                        <Route path="/contact" element={<Contact/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/complete-registration" element={<CompleteRegistration/>}/>
@@ -58,16 +60,16 @@ function Home() {
     return (
         <div id="fullpage">
             <div className="section">
-                <Hero />
+                <Hero/>
             </div>
             <div className="section">
-                <Main />
+                <Main/>
             </div>
             <div className="section">
-                <Recycle />
+                <Recycle/>
             </div>
             <div className="section">
-                <Products />
+                <Products/>
             </div>
             <div className="section">
                 <Newsletter/>
