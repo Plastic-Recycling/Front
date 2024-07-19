@@ -1,9 +1,10 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import CompleteRegistration from './components/CompleteRegistration';
 import Contact from "./components/Contact.jsx";
+import Profile from './components/Profile';
 import {Navigation} from './components/Navigation';
 import {Hero} from './components/Hero';
 import {Products} from './components/Products';
@@ -15,19 +16,26 @@ import 'fullpage.js/dist/fullpage.css';
 import './App.css';
 
 const App = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        setIsLoggedIn(!!token);
+    }, []);
     return (
         <Router>
             <div className="flex flex-col min-h-screen">
-                <Navigation/>
+                <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
                 <nav className="flex justify-center space-x-4 my-4">
                 </nav>
                 <main className="flex-1">
                     <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/contact" element={<Contact/>}/>
-                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/complete-registration" element={<CompleteRegistration/>}/>
+                        <Route path="/profile" element={<Profile />} />
                     </Routes>
                 </main>
             </div>
@@ -42,7 +50,6 @@ function Home() {
         if (!fullpageRef.current) {
             fullpageRef.current = new Fullpage('#fullpage', {
                 autoScrolling: true,
-                scrollHorizontally: true,
                 fitToSection: true,
                 fitToSectionDelay: 300,
                 scrollOverflow: true,

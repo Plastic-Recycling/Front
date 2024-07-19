@@ -2,8 +2,13 @@ import React from 'react';
 
 export function Recycle() {
     return (
-        <div className="relative w-full h-screen bg-cover bg-center"
-             style={{backgroundImage: "url('/src/assets/recycle.jfif')"}}>
+        <div className="relative w-full h-screen">
+            <div className="absolute inset-0 bg-no-repeat bg-center"
+                 style={{
+                     backgroundImage: "url('/src/assets/pp.webp')",
+                     backgroundSize: 'contain'
+                 }}>
+            </div>
             <div className="absolute inset-0 bg-black bg-opacity-50 flex items-end justify-start">
                 <div className="text-white p-5 lg:p-10" style={{marginLeft: '5%', marginBottom: '5%'}}>
                     <h1 className="text-4xl md:text-5xl lg:text-4xl font-bold mb-4">재활용</h1>
