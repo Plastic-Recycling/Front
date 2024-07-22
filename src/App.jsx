@@ -1,16 +1,18 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Login from './components/Login';
-import Register from './components/Register';
-import CompleteRegistration from './components/CompleteRegistration';
-import Contact from "./components/Contact.jsx";
-import Profile from './components/Profile';
+import Login from './components/user/Login.jsx';
+import Register from './components/user/Register.jsx';
+import CompleteRegistration from './components/user/CompleteRegistration.jsx';
+import About from './components/home/About.jsx';
+import Contact from "./components/home/Contact.jsx";
+import Profile from './components/user/Profile.jsx';
+import ImageUploadAnalysis from "./components/home/ImageUploadAnalysis.jsx";
 import {Navigation} from './components/Navigation';
-import {Hero} from './components/Hero';
-import {Products} from './components/Products';
-import {Newsletter} from './components/Newsletter.jsx';
-import {Recycle} from './components/Recycle.jsx';
-import {Main} from './components/Main.jsx';
+import {Hero} from './components/home/Hero.jsx';
+import {Products} from './components/home/Products.jsx';
+import {Newsletter} from './components/home/Newsletter.jsx';
+import {Recycle} from './components/home/Recycle.jsx';
+import {Main} from './components/home/Main.jsx';
 import Fullpage from 'fullpage.js';
 import 'fullpage.js/dist/fullpage.css';
 import './App.css';
@@ -32,8 +34,10 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/contact" element={<Contact/>}/>
+                        <Route path="/about" element={<About/>}/>
                         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
                         <Route path="/register" element={<Register/>}/>
+                        <Route path="/products" element={<ImageUploadAnalysis />}/>
                         <Route path="/complete-registration" element={<CompleteRegistration/>}/>
                         <Route path="/profile" element={<Profile />} />
                     </Routes>
