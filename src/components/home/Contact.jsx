@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-
-const API_URL = 'http://localhost:8080';
+import axiosInstance from "../../api/axiosInstance.jsx";
 
 const Contact = () => {
     const [inquiryType, setInquiryType] = useState('');
@@ -67,7 +65,7 @@ const Contact = () => {
         };
 
         try {
-            const response = await axios.post(`${API_URL}/contact`, formData);
+            const response = await axiosInstance.post(`/contact`, formData);
             console.log('Server response:', response.data);
             setSubmitStatus('success');
             setInquiryType('');

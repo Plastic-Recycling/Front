@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Input, Button } from '../FormComponents.jsx';
-
-const API_URL = 'http://localhost:8080';
+import axiosInstance from "../../api/axiosInstance.jsx";
 
 const CompleteRegistration = () => {
     const [name, setName] = useState('');
@@ -30,7 +28,7 @@ const CompleteRegistration = () => {
     const handleCompleteRegistration = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${API_URL}/register/complete`, { email, name, username, password, token });
+            await axiosInstance.post(`/register/complete`, { email, name, username, password, token });
             setMessage('Registration completed successfully! You can now login.');
             setTimeout(() => navigate('/login'), 2000);
         } catch (error) {

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Input, Button } from '../FormComponents.jsx';
+import axiosInstance from "../../api/axiosInstance.jsx";
 
-const API_URL = 'http://localhost:8080';
 
 const Login = ({setIsLoggedIn}) => {
     const [username, setUsername] = useState('');
@@ -15,7 +14,7 @@ const Login = ({setIsLoggedIn}) => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${API_URL}/auth/login`, { username, password });
+            const response = await axiosInstance.post(`/auth/login`, { username, password });
             localStorage.setItem('accessToken', response.data.accessToken);
             localStorage.setItem('refreshToken', response.data.refreshToken);
             setIsLoggedIn(true);
