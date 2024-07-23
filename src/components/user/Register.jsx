@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Input, Button } from '../FormComponents.jsx';
+import axiosInstance from "../../api/axiosInstance.jsx";
 
-const API_URL = 'http://localhost:8080';
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -15,7 +15,7 @@ const Register = () => {
     const handleVerifyEmail = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${API_URL}/register/verifyEmail`, null, { params: { email } });
+            const response = await axiosInstance.post(`/register/verifyEmail`, null, { params: { email } });
             console.log(response.data.isNewEmail)
             if (response.data.isNewEmail) {
                 setMessage('확인 이메일이 전송되었습니다. 이메일을 확인해주세요.');
