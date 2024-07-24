@@ -10,8 +10,8 @@ const ImageUploadAnalysis = () => {
         setUploadedImages(acceptedFiles.map(file => URL.createObjectURL(file)));
 
         const formData = new FormData();
-        acceptedFiles.forEach((file, index) => {
-            formData.append(`file${index}`, file);
+        acceptedFiles.forEach((file) => {
+            formData.append('file', file);
         });
 
         try {
@@ -25,6 +25,10 @@ const ImageUploadAnalysis = () => {
     }, []);
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, multiple: true });
+
+    const decodeBase64Image = (base64String) => {
+        return `data:image/jpeg;base64,${base64String}`;
+    };
 
     return (
         <div className="container mx-auto p-4 mt-20">
@@ -54,7 +58,11 @@ const ImageUploadAnalysis = () => {
                                 {analysisResults[index] && (
                                     <div className="w-full md:w-1/2 px-2 mb-4">
                                         <h4 className="text-md font-semibold mb-2">처리된 이미지</h4>
-                                        <img src={analysisResults[index].processedImage} alt={`Processed ${index + 1}`} className="max-w-full h-auto rounded shadow" />
+                                        <img
+                                            src={decodeBase64Image(analysisResults[index].processedImage)}
+                                            alt={`Processed ${index + 1}`}
+                                            className="max-w-full h-auto rounded shadow"
+                                        />
                                     </div>
                                 )}
                             </div>
@@ -88,11 +96,11 @@ const ImageUploadAnalysis = () => {
                                         </tr>
                                         <tr>
                                             <td className="border border-gray-300 p-2">무게</td>
-                                            <td className="border border-gray-300 p-2">{analysisResults[index].weight} kg</td>
+                                            <td className="border border-gray-300 p-2">{analysisResults[index].weight} g</td>
                                         </tr>
                                         <tr>
                                             <td className="border border-gray-300 p-2">탄소 배출 절감량</td>
-                                            <td className="border border-gray-300 p-2">{analysisResults[index].carbonReduction} kg</td>
+                                            <td className="border border-gray-300 p-2">{analysisResults[index].carbonReduction} g</td>
                                         </tr>
                                         <tr>
                                             <td className="border border-gray-300 p-2">가격</td>

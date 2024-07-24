@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link, useLocation, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import logo from '/src/assets/logo.png';
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -45,7 +46,7 @@ export function Navigation({isLoggedIn, setIsLoggedIn}) {
                 <div className="flex justify-between h-16">
                     <div className="flex">
                         <Link to="/" className="flex-shrink-0 flex items-center">
-                            <img className="h-8 w-auto" src="/src/assets/logo.png" alt="recycle"/>
+                            <img className="h-8 w-auto" src={logo} alt="recycle"/>
                             <span className="ml-2 text-xl font-bold">Plastic-Recycle</span>
                         </Link>
                     </div>

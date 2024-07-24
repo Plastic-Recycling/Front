@@ -1,11 +1,16 @@
 import React from 'react';
+import mainImage from '/src/assets/about/main.jpg';
+import naverIcon from '/src/assets/about/naver.png';
+import instaIcon from '/src/assets/about/insta.png';
+import youtubeIcon from '/src/assets/about/youtube.png';
+import kakaoIcon from '/src/assets/about/kakao.png';
 
 const About = () => {
     return (
         <div className="min-h-screen bg-white">
             <section className="h-screen relative">
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <img src="/src/assets/about/main.jpg" alt="main" />
+                    <img src={mainImage} alt="main"/>
                 </div>
             </section>
 
@@ -84,16 +89,16 @@ const About = () => {
                     <h2 className="text-3xl font-bold mb-8 text-center text-slate-700">소셜미디어</h2>
                     <div className="flex justify-center space-x-8">
                         <div className="w-16 h-16 bg-green-500 flex items-center justify-center rounded-lg">
-                            <img className="rounded-md" src="/src/assets/about/naver.png" alt="naver" />
+                            <img className="rounded-md" src={naverIcon} alt="naver"/>
                         </div>
                         <div className="w-16 h-16 bg-purple-500 flex items-center justify-center rounded-lg">
-                            <img className="rounded-md" src="/src/assets/about/insta.png" alt="insta"/>
+                            <img className="rounded-md" src={instaIcon} alt="insta"/>
                         </div>
                         <div className="w-16 h-16 bg-red-500 flex items-center justify-center rounded-lg">
-                            <img className="rounded-md" src="/src/assets/about/youtube.png" alt="youtube"/>
+                            <img className="rounded-md" src={youtubeIcon} alt="youtube"/>
                         </div>
                         <div className="w-16 h-16 bg-yellow-500 flex items-center justify-center rounded-lg">
-                            <img className="rounded-md h-full" src="/src/assets/about/kakao.png" alt="kakao"/>
+                            <img className="rounded-md h-full" src={kakaoIcon} alt="kakao"/>
                         </div>
                     </div>
                 </div>
