@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '/src/assets/logo.png';
 
 export function Hero() {
     return (
         <div className="relative bg-white overflow-hidden">
             <div className="hidden lg:block absolute inset-y-0 right-0 w-1/2">
-                <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="/src/assets/logo.png" alt="Plastic-Recycle" />
+                <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={logo} alt="Plastic-Recycle"/>
             </div>
             <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center h-screen">
                 <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">

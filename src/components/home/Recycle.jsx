@@ -1,11 +1,12 @@
 import React from 'react';
+import ppImage from '/src/assets/pp.webp';
 
 export function Recycle() {
     return (
         <div className="relative w-full h-screen">
             <div className="absolute inset-0 bg-no-repeat bg-center"
                  style={{
-                     backgroundImage: "url('/src/assets/pp.webp')",
+                     backgroundImage: `url(${ppImage})`,
                      backgroundSize: 'contain'
                  }}>
             </div>
