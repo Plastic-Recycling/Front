@@ -14,7 +14,7 @@ const About = () => {
                 </div>
             </section>
 
-            <section className="py-16 px-4 md:px-8 lg:px-16 mt-20">
+            <section className="py-16 px-4 md:px-8 lg:px-16 mt-40">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="text-3xl font-bold mb-8 text-slate-700">내가 하는 작은 행동이<br />맑고 푸른 세상을 만들 수 있도록<br />지속 가능한 미래를 위해 우리 모두의 노력이 필요합니다.</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
